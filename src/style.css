@@ -1,0 +1,89 @@
+.flex-container, form, .col2, #pokedex-result, fieldset {
+	display: flex;
+	flex: 1 1 0;
+	flex-wrap: wrap;
+}
+
+fieldset {
+	margin: 10px 40px;
+	background-color: #84e9c3;
+}
+
+.row {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.col2 {
+	flex-direction: column;
+	flex-wrap: wrap;
+}
+
+#typeList {
+	flex-direction: row;
+	max-height: 400px;
+}
+
+#pokedex-result {
+    margin: 0px 5%;
+	padding: 0px 5%;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.tiles {
+	margin: 5px 10px;
+	background-color: lightgray;
+	max-width: 20%;
+}
+
+img {
+	width: 100%;
+}
+
+#title {
+	text-align: center;
+	background-color: yellow;
+}
+
+.circle-grey {
+	width: 25px;
+	height: 25px;
+	margin-left: 20px;
+	border-radius: 50%;
+	background-color: lightgrey;
+	text-align: center;
+}
+
+.circle-caract {
+	width: 75px;
+	height: 75px;
+	margin-left: 20px;
+	border-radius: 50%;
+	background-color: lightgrey;
+	text-align: center;
+}
+
+.oneType{
+	display: flex;
+	flex: 1 1 0;
+	flex-wrap: nowrap;
+	min-width: 50%;
+}
+
+.typeName {
+	min-width: 75px;
+}
+
+input {
+	width: fit-content;
+}
+
+#submitForm {
+	display: inline-block;
+}
+
+select {
+	height: fit-content;
+}
