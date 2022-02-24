@@ -104,7 +104,7 @@ export default {
 			else this.search = true; //To mask some unnecessary elements
 		},
 		//Retrieve the this.limit next pokemons information and
-		async getNextPokes(offset = this.offset, prev = false) {
+		async getNextPokes(offset = this.offset, prev = false, preventErase = false) {
 			if (this.pokemonList.length == 0) {
 				//For the first run
 				await P.getPokemonsList().then((response) => {
@@ -115,7 +115,9 @@ export default {
 
 			if (prev) offset -= 2 * this.limit; //If we're going backward we have to substract twice 'this.limit' because the offset is at the beginning of the next set of pokemon. If we substract it once, we'll get the same display
 
-			this.pokemons = []; //Clear display
+			if (!preventErase) {
+				this.pokemons = []; //Clear display
+			}
 			let bound = Math.min(offset + parseInt(this.limit), this.pokemonList.length);
 			for (let i = offset; i < bound; i++) {
 				P.getPokemonByName(this.pokemonList[i].name).then((pokemon) => {
@@ -134,15 +136,20 @@ export default {
 						img: this.getImg(pokemon),
 						types: pokemon.types,
 						abilities: pokemon.abilities,
-						weight: pokemon.weight,
+						weight: pokemon.weight / 10.0,
 					},
 				];
 			});
 		},
 		updateLimit(limit) {
-			this.offset -= this.limit; //We reset the offset at the beginning of the current set
+			//Update the display so we get the same pokemons with the other ones. If the new limit is bigger than the old old, just append the results. Otherwise erase the last pokemons
+			if (limit < this.limit) {
+				this.offset -= this.limit; //We reset the offset at the beginning of the current set
+				this.pokemons.length = limit;
+			} else {
+				this.getNextPokes(this.offset, false, true);
+			}
 			this.limit = limit; //We update the value of limit
-			this.getNextPokes(); //And then update the display so we get the same pokemons with the other ones
 		},
 		changePage(n) {
 			this.offset = this.limit * (n - 1); //Set the offset to match the beginning of page n

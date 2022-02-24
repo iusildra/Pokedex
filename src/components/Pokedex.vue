@@ -12,6 +12,7 @@ defineProps({
 <template>
 	<div class="pokedex">
 		<div id="pokelist" class="col23">
+			<!--Display the select for max number of pokemons-->
 			<div class="row" v-if="!search">
 				<label for="nbMax">Nombre max à afficher</label>
 				<select id="nbMax" @change="updateLimit()" v-model="limit">
@@ -22,6 +23,8 @@ defineProps({
 					<option value="125">125</option>
 				</select>
 			</div>
+
+			<!--Display the existing pages-->
 			<div class="row" id="pages" v-if="!search">
 				<div
 					class="page"
@@ -32,7 +35,17 @@ defineProps({
 					{{ page }}
 				</div>
 			</div>
-			<div class="tiles" v-for="pokemon of pokemons" ref="pokemon.id">
+
+			<!--Sort pokemons by id and display them-->
+			<div
+				class="tiles"
+				v-for="pokemon of pokemons.sort((a, b) => {
+					if (a.id < b.id) return -1;
+					if (a.id === b.id) return 0;
+					return 1;
+				})"
+				ref="pokemon.id"
+			>
 				<img
 					:src="pokemon.img"
 					:alt="pokemon.name + ' picture'"
@@ -46,6 +59,8 @@ defineProps({
 					}}</span>
 				</p>
 			</div>
+
+			<!--Display page navigation buttons-->
 			<div class="row">
 				<div class="pageNav" @click="firstPoke">First</div>
 				<div class="pageNav" :disabled="firstPage" @click="previousPoke">
@@ -55,6 +70,8 @@ defineProps({
 				<div class="pageNav" @click="lastPoke">Last</div>
 			</div>
 		</div>
+
+		<!--Display pokemon's detailled information-->
 		<div class="col13">
 			<div id="pokemonInfos" v-for="info in detailledInfo" :key="info.id">
 				<p>
