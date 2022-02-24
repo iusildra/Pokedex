@@ -116,7 +116,7 @@ export default {
 			if (prev) offset -= 2 * this.limit; //If we're going backward we have to substract twice 'this.limit' because the offset is at the beginning of the next set of pokemon. If we substract it once, we'll get the same display
 
 			this.pokemons = []; //Clear display
-			let bound = Math.min(offset + this.limit, this.pokemonList.length);
+			let bound = Math.min(offset + parseInt(this.limit), this.pokemonList.length);
 			for (let i = offset; i < bound; i++) {
 				P.getPokemonByName(this.pokemonList[i].name).then((pokemon) => {
 					this.addPoke(pokemon.name);
