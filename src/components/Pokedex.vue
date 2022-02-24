@@ -44,7 +44,6 @@ defineProps({
 					if (a.id === b.id) return 0;
 					return 1;
 				})"
-				ref="pokemon.id"
 			>
 				<img
 					:src="pokemon.img"
@@ -150,6 +149,10 @@ export default {
 	min-width: 200px;
 	max-width: 25%;
 	flex: 1 1 0;
+}
+
+.tiles > img {
+	margin-top: 5px;
 }
 
 img {
