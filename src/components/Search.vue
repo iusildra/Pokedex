@@ -6,7 +6,7 @@ defineProps({
 
 <template>
 	<fieldset>
-		<legend>Recherche</legend>
+		<legend><h1>Recherche</h1></legend>
 		<form @submit.prevent="onSubmit">
 			<div class="row" id="nameId">
 				<span>
@@ -100,22 +100,23 @@ export default {
 	},
 	data() {
 		return {
-			types: [],
-			abilities: [],
+			types: [], //List of every type
+			abilities: [], //List of every ability
 			weights: ["Light", "Medium", "Heavy"],
 			sizes: ["Small", "Medium", "Tall"],
 			name: "",
 			id: "",
-			wtTypes: {},
-			wtWeaknesses: {},
-			wtAbility: "",
-			wtWeight: "",
-			wtHeigth: "",
-			wtRange: Array(2),
-			circleColor: ["lightgrey", "blue"],
+			wtTypes: {}, //List of wanted types
+			wtWeaknesses: {}, //...
+			wtAbility: "", //..
+			wtWeight: "", //..
+			wtHeigth: "", //..
+			wtRange: Array(2), //..
+			circleColor: ["lightgrey", "blue"], //To change the color of a clicked circle
 		};
 	},
 	methods: {
+		//Retrieve the type list
 		fetchTypes() {
 			fetch("https://pokeapi.co/api/v2/type")
 				.then((response) => response.json())
@@ -128,6 +129,7 @@ export default {
 					}
 				});
 		},
+		//Retrieve the ability list
 		fetchAbilities() {
 			fetch("https://pokeapi.co/api/v2/ability?limit=327")
 				.then((response) => response.json())
@@ -140,8 +142,8 @@ export default {
 					}
 				});
 		},
+		//Add or remove a type to the wanted type variable based on it's presence in the variable
 		changeType(type) {
-			//Ajoute le type s'il n'existe pas déjà. Sinon l'enlève
 			if (this.wtTypes.hasOwnProperty(type)) {
 				delete this.wtTypes[type];
 			} else {
@@ -149,8 +151,8 @@ export default {
 				this.wtTypes[type] = type;
 			}
 		},
+		//Add or remove a weakness to the wanted type variable based on it's presence in the variable
 		changeWeakness(type) {
-			//Ajoute le type s'il n'existe pas déjà. Sinon l'enlève
 			if (this.wtWeaknesses.hasOwnProperty(type)) {
 				delete this.wtWeaknesses[type];
 			} else {
@@ -158,12 +160,15 @@ export default {
 				this.wtWeaknesses[type] = type;
 			}
 		},
+		//Apply changes
 		changeHeigth(value) {
 			this.wtHeigth = value;
 		},
+		//Apply changes
 		changeWeight(value) {
 			this.wtWeight = value;
 		},
+		//Validate the form and ask for searching
 		onSubmit() {
 			const search = {
 				name: this.name,
@@ -182,36 +187,26 @@ export default {
 </script>
 
 <style scoped>
-.flex-container,
-form,
-.col2,
-fieldset {
-	display: flex;
+.col2 {
 	flex: 1 1 0;
+	display: flex;
 	flex-wrap: wrap;
+	flex-direction: column;
+	align-content: space-between;
+	justify-content: space-evenly;
 }
 
 fieldset {
-	margin: 10px 40px;
+	margin: 10px 0px;
 	background-color: #84e9c3;
 }
-
 .row {
+	width: 100%;
+	margin-top: 20px;
+	flex: 1 1 0;
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: row;
-	justify-content: space-evenly;
-	flex-grow: 1;
-	margin-top: 20px;
-	width: 100%;
-}
-
-#range {
-	display: block;
-}
-.col2 {
-	flex-direction: column;
-	align-content: space-between;
 	justify-content: space-evenly;
 }
 
@@ -219,67 +214,39 @@ fieldset {
 	flex-direction: row;
 }
 
-#pokelist {
-	margin: 0px 5%;
-	padding: 0px 5%;
-	background-color: #eee;
-	justify-content: space-evenly;
+.circle-grey,
+.circle-caract {
+	background-color: lightgrey;
+	border: 1px solid black;
+	border-radius: 50%;
+	margin-left: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
 }
-
-.tiles {
-	margin: 20px 15px;
-	background-color: lightgray;
-	max-width: 25%;
-	min-width: 150px;
-	box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
-}
-
-img {
-	width: 100%;
-}
-
-#title {
-	background-color: yellow;
-	text-align: center;
-}
-
 .circle-grey {
 	width: 25px;
 	height: 25px;
-	margin-left: 20px;
-	border-radius: 50%;
-	background-color: lightgrey;
-	border: 1px solid black;
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
 }
 
 .circle-caract {
 	width: 75px;
 	height: 75px;
-	margin-left: 20px;
-	border-radius: 50%;
-	border: 1px solid black;
-	background-color: lightgrey;
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
 }
 
 .oneType {
-	display: flex;
-	flex: 1 1 0;
+	box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+	background-color: lightgrey;
+	border: 1px dotted black;
+	border-radius: 25px;
+	padding: 0px 10px;
+	height: 50px;
+	margin: 5px;
 	justify-content: space-around;
 	align-items: center;
 	flex-wrap: nowrap;
-	background-color: lightgrey;
-	border-radius: 25px;
-	border: 1px dotted black;
-	margin: 5px;
-	height: 50px;
-	padding: 0px 10px;
-	box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+	display: flex;
+	flex: 1 1 0;
 }
 
 .typeName {
@@ -289,7 +256,8 @@ img {
 input,
 select {
 	margin-left: 5px;
-	padding: 5px;
+	padding: 2px 10px;
+	border-radius: 10px;
 	height: fit-content;
 }
 
@@ -298,8 +266,9 @@ select {
 }
 
 #nbRangeMin,
-#nbRangeMax {
-	width: 50px;
+#nbRangeMax,
+#pokeId {
+	width: 75px;
 }
 
 #nameId {

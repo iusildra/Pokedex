@@ -119,20 +119,20 @@ export default {
 
 <style scoped>
 #pokelist {
+	background-color: #eee;
+	padding: 0px 20px;
+	flex: 1 1 0;
 	display: flex;
 	flex-wrap: wrap;
-	flex: 1 1 0;
-	padding: 0px 20px;
-	background-color: #eee;
 	justify-content: space-evenly;
 }
 .tiles {
-	margin: 20px 15px;
-	background-color: lightgray;
-	max-width: 25%;
-	min-width: 200px;
-	flex: 1 1 0;
 	box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+	background-color: lightgray;
+	margin: 20px 15px;
+	min-width: 200px;
+	max-width: 25%;
+	flex: 1 1 0;
 }
 
 img {
@@ -142,9 +142,9 @@ img {
 span {
 	border: 1px dotted black;
 	border-radius: 25px;
-	padding: 5px;
-	margin-right: 5px;
 	margin-bottom: 10px;
+	margin-right: 5px;
+	padding: 5px;
 }
 .type {
 	background-color: lightgreen;
@@ -155,70 +155,64 @@ span {
 }
 
 select {
-	margin: 0px 5px;
+	margin-left: 10px;
 }
 .pageNav {
-	width: 100px;
-	height: 50px;
+	background-color: lightgreen;
 	border: 1px dashed black;
 	border-radius: 25px;
-	background-color: lightgreen;
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
 	margin: 10px 10px;
+	width: 100px;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
 }
 
 .row {
+	margin-top: 10px;
 	width: 100%;
+	flex-grow: 1;
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: row;
 	justify-content: center;
-	flex-grow: 1;
-	margin-top: 10px;
 }
 
-.pokedex {
-	display: flex;
-}
 .page {
 	background-color: lightblue;
+	border-radius: 5px;
 	margin: 5px 5px;
 	padding: 3px;
-	border-radius: 5px;
 }
 
 #pages {
 	padding: 0px 50px;
 }
 
-template {
-	display: flex;
-	justify-content: space-around;
-}
-
 .col23,
 .col13 {
-	display: flex;
 	flex: 1 1 0;
-	justify-content: space-around;
+	display: flex;
 	align-content: space-around;
+	justify-content: space-around;
 }
 .col23 {
-	max-width: 60%;
+	max-width: 75%;
+	border-right: 2px dashed black;
 }
 .col13 {
 	max-width: 20%;
 }
 
 #pokemonInfos {
+	box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+	background-color: lightblue;
 	height: fit-content;
-	width: 250px;
 	position: sticky;
+	width: 250px;
 	top: 30%;
 	right: 0;
-	background-color: lightblue;
 }
 
 #pokemonInfos p {
