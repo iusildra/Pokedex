@@ -103,6 +103,7 @@ export default {
 			if (search.id <= "" && search.name <= "") this.search = false;
 			else this.search = true; //To mask some unnecessary elements
 		},
+		searchAndMergeAbilities(abilities) {},
 		//Retrieve the this.limit next pokemons information and
 		async getNextPokes(offset = this.offset, option = {}) {
 			if (this.pokemonList.length == 0) {
